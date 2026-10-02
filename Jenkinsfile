@@ -17,8 +17,10 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                sh 'kubectl apply -f k8s/'
-            }
+            	sh 'kubectl apply -f k8s/namespace.yaml'
+                sh 'kubectl apply -f k8s/service.yaml'
+                sh 'kubectl apply -f k8s/deployment.yaml'
+		}
         }
 
         stage('Verify') {
