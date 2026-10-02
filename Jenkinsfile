@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        KUBECONFIG = '/var/lib/jenkins/.kube/config'
+    }
+
     stages {
 
         stage('Checkout') {
@@ -17,10 +21,10 @@ pipeline {
 
         stage('Deploy') {
             steps {
-            	sh 'kubectl apply -f k8s/namespace.yaml'
+                sh 'kubectl apply -f k8s/namespace.yaml'
                 sh 'kubectl apply -f k8s/service.yaml'
                 sh 'kubectl apply -f k8s/deployment.yaml'
-		}
+            }
         }
 
         stage('Verify') {
